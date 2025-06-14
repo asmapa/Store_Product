@@ -1,0 +1,1 @@
+This is a simple PERN stack project to get more familiarize with tech stack
