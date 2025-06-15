@@ -18,11 +18,35 @@ export const createProduct = async (req, res) => {
   }
 
   try {
-    const newproduct = await query("insert into productstore(name,price,) ")
+    const {rows} = await query(
+      `INSERT INTO productstore(name, price, image) VALUES ($1, $2, $3)`,
+      [name, price, image]
+    );
+    return rows[0];
   } catch (err) {
-    
+    console.log("Error while inserting values in product store....", err);
+    res.status(500).json({ success: false, message: "internal server error" });
   }
 };
-export const getProduct = async (req, res) => {};
-export const updateProduct = async (req, res) => {};
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const prod = await query(`select *from productstore where id=$1`, [id]);
+    console.log("success in fetching single data", prod.rows[0]);
+  } catch (err) {
+    console.log("error while fetching data using id ", err);
+    res.status(500).json({ success: false, message: "internal server error" });
+  }
+};
+export const updateProduct = async (req, res) => {
+  const { id } = req.params
+  const { name, price, image } = req.body
+  
+  try {
+    const { rows } = await query(`update productstore set name=$1,price=$2,image=$3 where id=$4 returing *`, [name, price, image, id]);
+  } catch (err) {
+    console.log("error while updation....", err);
+    res.status(500).json({ success: false, message: "internal server error" });
+  }
+};
 export const deleteProduct = async(req, res) => {};
