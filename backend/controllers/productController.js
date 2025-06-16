@@ -31,8 +31,9 @@ export const createProduct = async (req, res) => {
 export const getProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const prod = await query(`select *from productstore where id=$1`, [id]);
-    console.log("success in fetching single data", prod.rows[0]);
+    const { rows } = await query(`select *from productstore where id=$1`, [id]);
+    res.status(200).json({ success: true, data: rows[0] });
+    
   } catch (err) {
     console.log("error while fetching data using id ", err);
     res.status(500).json({ success: false, message: "internal server error" });
@@ -44,9 +45,19 @@ export const updateProduct = async (req, res) => {
   
   try {
     const { rows } = await query(`update productstore set name=$1,price=$2,image=$3 where id=$4 returing *`, [name, price, image, id]);
+    return rows[0];
   } catch (err) {
     console.log("error while updation....", err);
-    res.status(500).json({ success: false, message: "internal server error" });
+    res.status(500).json({ success: false, message: "product not found" });
   }
 };
-export const deleteProduct = async(req, res) => {};
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { rows } = await query(`delete from productstore where id=$1 returing *`, [id]);
+    return rows[0];
+  } catch (err) {
+    console.log("error while deleteing data.....", err);
+    res.status(500).json({success:false,message:"internal server error"})
+  }
+};
