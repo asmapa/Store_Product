@@ -4,16 +4,17 @@ const Contact = () => {
   return (
       <div>
           <div className="bg-purple-100 py-10 px-4 text-center">
-              <h2 className="text-2xl font-bold text-purple-700 mb-4">📞 Get in Touch With Us!</h2>
-              <p className="text-purple-600 mb-6 max-w-xl mx-auto">
+              <hr className="border-t border-purple-300 my-8"/>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">📞 Get in Touch With Us!</h2>
+              <p className="text-gray-800 mb-6 max-w-xl mx-auto">
                   Have a question, feedback, or just wanna say hi? Fill out the form below and we’ll get back to you with sparkle ✨
               </p>
               <form className="max-w-lg mx-auto grid gap-4">
                   <input type="text" placeholder="Your Name" className="border border-purple-300 p-3 rounded-md" />
                   <input type="email" placeholder="Your Email" className="border border-purple-300 p-3 rounded-md" />
                   <textarea placeholder="Your Message" className="border border-purple-300 p-3 rounded-md h-32"></textarea>
-                  <button type="submit" className="bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition">
-                      Send Message 💌
+                  <button type="submit" className="bg-gray-800 text-white py-2 rounded-md hover:bg-purple-800 transition">
+                      Send Message
                   </button>
               </form>
           </div>
